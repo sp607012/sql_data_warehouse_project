@@ -1,6 +1,6 @@
-.
 
-🎯 Project Objectives
+
+# 🎯 Project Objectives
 🔹 Data Engineering (Data Warehouse)
 
 Build a modern data warehouse using PostgreSQL to consolidate and transform sales data for analytical reporting and decision-making.
