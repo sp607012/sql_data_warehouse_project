@@ -1,81 +1,86 @@
+.
 
-# Data Warehouse and Analytics Project
-Welcome to the **Data Warehouse and Analytics Project repository**! 🚀
-This project demonstrates a comprehensive data warehousing and analytics solution, from building a data warehouse to generating actionable insights. Designed as a portfolio project, it highlights industry best practices in data engineering and analytics.
+🎯 Project Objectives
+🔹 Data Engineering (Data Warehouse)
 
-## 🚀 Project Requirements
-Building the Data Warehouse (Data Engineering)
-### Objective
-Develop a modern data warehouse using SQL Server to consolidate sales data, enabling analytical reporting and informed decision-making.
+Build a modern data warehouse using PostgreSQL to consolidate and transform sales data for analytical reporting and decision-making.
 
-#### Specifications
-**Data Sources**: Import data from two source systems (ERP and CRM) provided as CSV files.
+Key Requirements:
 
-**Data Quality**: Cleanse and resolve data quality issues prior to analysis.
+Data Sources: Import data from two source systems (ERP & CRM) provided as CSV files.
 
-**Integration**: Combine both sources into a single, user-friendly data model designed for analytical queries.
+Data Quality: Cleanse and resolve inconsistencies before analysis.
 
-**Scope**: Focus on the latest dataset only; historization of data is not required.
+Integration: Merge ERP & CRM into a unified, user-friendly data model optimized for analytics.
 
-#### Documentation: Provide clear documentation of the data model to support both business stakeholders and analytics teams.
+Scope: Focus only on the latest dataset (no historization).
 
-### 📊 BI & Analytics (Data Analytics)
-🎯 Objective
+Documentation: Provide clear data model documentation for both business stakeholders and analysts.
 
-Develop SQL-based analytics to generate insights and support decision-making.
+📊 Data Analytics (BI Layer)
 
-#### 📋 Focus Areas
+Develop SQL-based analytics to provide actionable insights.
 
-**Customer Behavior**
+Focus Areas:
 
-**Product Performance**
+Customer Behavior Analysis
 
-**Sales Trends**
+Product Performance
 
-**These insights empower stakeholders with key business metrics, enabling strategic decision-making.**
+Sales Trends & KPIs
 
-#### ⚙️ Tech Stack
+These insights empower stakeholders with strategic metrics for data-driven decision-making.
 
-**Database**: PostgreSQL 15+
+⚙️ Tech Stack
 
-**ETL**: PL/pgSQL (stored procedures, transformations)
+Database: PostgreSQL 15+
 
-**Modeling**: Star Schema (Fact & Dimension tables)
+ETL: PL/pgSQL (stored procedures, transformations)
 
-**Data Layers**: Bronze (raw) → Silver (cleansed) → Gold (analytics-ready)
+Modeling: Star Schema (Fact & Dimension tables)
 
-**Visualization**: SQL queries + BI tools (optional)
+Data Layers: Bronze (raw) → Silver (cleansed) → Gold (analytics-ready)
 
-#### ✅ Key Features
+Visualization: SQL queries + optional BI tools (Power BI / Tableau)
+
+✅ Key Features
 
 Automated ETL workflows with error handling
 
 Standardized country codes, gender, dates, and IDs
 
-Row counts and transformation logs for monitoring
+Row counts & transformation logs for monitoring
 
 Optimized queries with indexes for faster analytics
 
-Well-structured schema for scalable reporting
+Scalable star-schema design for reporting
 
-#### 📂 Project Structure
-├── /bronze        # Raw data ingestion
-├── /silver        # Cleaned & standardized data
-├── /gold          # Analytics-ready data models
-├── scripts/       # SQL & PL/pgSQL ETL scripts
-└── README.md      # Project documentation
+📂 Project Structure
+├── /bronze        # Raw data ingestion layer  
+├── /silver        # Cleaned & standardized data  
+├── /gold          # Analytics-ready data models  
+├── /scripts       # SQL & PL/pgSQL ETL scripts  
+└── README.md      # Project documentation  
 
+📜 License
 
-#### 📜 License
+This project is licensed under the MIT License.
+You are free to use, modify, and share with proper attribution.
 
-**This project is licensed under the MIT License**
-.
-You are free to use, modify, and share this project with proper attribution.
-
-#### 🌟 About Me
+🌟 About Me
 
 Hi there! 👋 I’m Sagar Kumar.
-I’m a Data Enthusiast with a background in Electrical Engineering and growing expertise in Data Engineering and Analytics.
-My mission is to explore and share knowledge in PostgreSQL, ETL pipelines, and modern data warehousing, while building projects that make learning practical and engaging!
+I’m a Data Enthusiast with a background in Electrical Engineering and growing expertise in Data Engineering & Analytics.
 
-#### Thank you for viewing this project. Explore the repository to see best-practice approaches in data engineering and analytics!
+My mission is to explore and share knowledge in:
+
+PostgreSQL
+
+ETL pipelines
+
+Modern Data Warehousing
+
+...while building projects that make learning practical and engaging! 🚀
+
+✨ Thank you for checking out this project!
+Explore the repository to see best-practice approaches in data engineering and analytics.
