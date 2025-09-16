@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # **Naming Conventions**
 
 This document outlines the naming conventions used for schemas, tables, views, columns, and other objects in the data warehouse.
@@ -79,3 +80,6 @@ This document outlines the naming conventions used for schemas, tables, views, c
   - Example: 
     - `load_bronze` → Stored procedure for loading data into the Bronze layer.
     - `load_silver` → Stored procedure for loading data into the Silver layer.
+=======
+
+>>>>>>> a2299411bb3ecae66cfa129fb6cad77042190b85

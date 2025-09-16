@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Data Catalog for Gold Layer
 
 ## Overview
@@ -59,3 +60,6 @@ The Gold Layer is the business-level data representation, structured to support 
 | sales_amount    | INT           | The total monetary value of the sale for the line item, in whole currency units (e.g., 25).   |
 | quantity        | INT           | The number of units of the product ordered for the line item (e.g., 1).                       |
 | price           | INT           | The price per unit of the product for the line item, in whole currency units (e.g., 25).      |
+=======
+
+>>>>>>> a2299411bb3ecae66cfa129fb6cad77042190b85
