@@ -123,7 +123,7 @@ Explore the repository to see best-practice approaches in data engineering and a
 
 Let's stay in touch! Feel free to connect with me on the following platforms:
 
-[![LinkedIn](www.linkedin.com/in/iamsagarkumar)
+[![LinkedIn] (www.linkedin.com/in/iamsagarkumar)
 
 =======
 
