@@ -88,4 +88,4 @@ CREATE TABLE silver.crm_prd_info (
     prd_end_dt   DATE,
 	dwh_create_date     TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
->>>>>>> 337dade689eb5a2a14864ef875e41aa09a1bdf3a
+
