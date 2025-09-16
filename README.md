@@ -1,5 +1,4 @@
 
-<<<<<<< HEAD
 # Data Warehouse and Analytics Project
 
 Welcome to the **Data Warehouse and Analytics Project** repository! 🚀  
@@ -211,4 +210,4 @@ Modern Data Warehousing
 
 ✨ Thank you for checking out this project!
 Explore the repository to see best-practice approaches in data engineering and analytics.
->>>>>>> 337dade689eb5a2a14864ef875e41aa09a1bdf3a
+
