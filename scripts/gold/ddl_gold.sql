@@ -22,155 +22,85 @@ Usage:
 ===============================================================================
 */
 
-<<<<<<< HEAD
--- =============================================================================
--- Create Dimension: gold.dim_customers
--- =============================================================================
-IF OBJECT_ID('gold.dim_customers', 'V') IS NOT NULL
-    DROP VIEW gold.dim_customers;
-GO
 
-CREATE VIEW gold.dim_customers AS
-SELECT
-    ROW_NUMBER() OVER (ORDER BY cst_id) AS customer_key, -- Surrogate key
-    ci.cst_id                          AS customer_id,
-    ci.cst_key                         AS customer_number,
-    ci.cst_firstname                   AS first_name,
-    ci.cst_lastname                    AS last_name,
-    la.cntry                           AS country,
-    ci.cst_marital_status              AS marital_status,
-    CASE 
-        WHEN ci.cst_gndr != 'n/a' THEN ci.cst_gndr -- CRM is the primary source for gender
-        ELSE COALESCE(ca.gen, 'n/a')  			   -- Fallback to ERP data
-    END                                AS gender,
-    ca.bdate                           AS birthdate,
-    ci.cst_create_date                 AS create_date
-FROM silver.crm_cust_info ci
-LEFT JOIN silver.erp_cust_az12 ca
-    ON ci.cst_key = ca.cid
-LEFT JOIN silver.erp_loc_a101 la
-    ON ci.cst_key = la.cid;
-GO
-
--- =============================================================================
--- Create Dimension: gold.dim_products
--- =============================================================================
-IF OBJECT_ID('gold.dim_products', 'V') IS NOT NULL
-    DROP VIEW gold.dim_products;
-GO
-=======
 -- ===================================================================
 -- Create Dimension: gold.dim_customers
 -- ===================================================================
-DROP VIEW IF EXISTS gold.dim_customers;
-
 CREATE OR REPLACE VIEW gold.dim_customers AS
 SELECT 
-    row_number() OVER (ORDER BY ci.cst_id) AS customer_key,   -- surrogate key
-    ci.cst_id AS customer_id,                                
-    ci.cst_key AS customer_number,                       
-    ci.cst_lastname AS last_name,
-    la.cntry AS country,
-    ci.cst_marital_status AS marital_status,
+    
+    ROW_NUMBER() OVER (ORDER BY ci.cst_id) AS customer_key,   -- Surrogate key (generated)
+    
+    -- Natural / source keys
+    ci.cst_id       AS customer_id,          
+    ci.cst_key      AS source_customer_key,  
+    
+   
+    ci.cst_firstname       AS first_name,
+    ci.cst_lastname        AS last_name,
+    la.cntry               AS country,
+    ci.cst_marital_status  AS marital_status,
+ 
     CASE 
-        WHEN ci.cst_gndr != 'n/a' THEN ci.cst_gndr
+        WHEN ci.cst_gndr != 'n/a' 
+            THEN ci.cst_gndr
         ELSE COALESCE(ca.gen, 'n/a')
     END AS gender,
-    ca.bdate AS birth_date,
+    
+    ca.bdate          AS birth_date,
     ci.cst_create_date AS create_date
+
 FROM silver.crm_cust_info AS ci
 LEFT JOIN silver.erp_loc_az12 AS ca 
-    ON ci.cst_key = ca.cid
+       ON ci.cst_key = ca.cid
 LEFT JOIN silver.erp_loc_a101 AS la
-    ON ci.cst_key = la.cid;
-
+       ON ci.cst_key = la.cid;
 
 
 
 -- ===================================================================
 -- Create Dimension: gold.dim_products
--- ===================================================================
-DROP VIEW IF EXISTS gold.dim_products;
->>>>>>> 337dade689eb5a2a14864ef875e41aa09a1bdf3a
+-- ================================================================
 
-CREATE VIEW gold.dim_products AS
-SELECT
-    ROW_NUMBER() OVER (ORDER BY pn.prd_start_dt, pn.prd_key) AS product_key, -- Surrogate key
-<<<<<<< HEAD
-    pn.prd_id       AS product_id,
-    pn.prd_key      AS product_number,
-    pn.prd_nm       AS product_name,
-    pn.cat_id       AS category_id,
-    pc.cat          AS category,
-    pc.subcat       AS subcategory,
-    pc.maintenance  AS maintenance,
-    pn.prd_cost     AS cost,
-    pn.prd_line     AS product_line,
-    pn.prd_start_dt AS start_date
-FROM silver.crm_prd_info pn
-LEFT JOIN silver.erp_px_cat_g1v2 pc
-    ON pn.cat_id = pc.id
-WHERE pn.prd_end_dt IS NULL; -- Filter out all historical data
-GO
-
--- =============================================================================
--- Create Fact Table: gold.fact_sales
--- =============================================================================
-IF OBJECT_ID('gold.fact_sales', 'V') IS NOT NULL
-    DROP VIEW gold.fact_sales;
-GO
-
-CREATE VIEW gold.fact_sales AS
-SELECT
-    sd.sls_ord_num  AS order_number,
-    pr.product_key  AS product_key,
-    cu.customer_key AS customer_key,
-    sd.sls_order_dt AS order_date,
-    sd.sls_ship_dt  AS shipping_date,
-    sd.sls_due_dt   AS due_date,
-    sd.sls_sales    AS sales_amount,
-    sd.sls_quantity AS quantity,
-    sd.sls_price    AS price
-=======
-    pn.prd_id         AS product_id,
-    pn.prd_key        AS product_number,
-    pn.prd_nm         AS product_name,
-    pn.cat_id         AS category_id,
-    pc.cat            AS category,
-    pc.subcat         AS subcategory,
-    pc.maintenance    AS maintenance,
-    pn.prd_cost       AS cost,
-    pn.prd_line       AS product_line,
-    pn.prd_start_dt   AS start_date
-FROM silver.crm_prd_info pn
-LEFT JOIN silver.erp_px_cat_g1v2 pc
-    ON pn.cat_id = pc.id
- WHERE pn.prd_end_dt IS NULL;              ---filter out all historical data
+CREATE OR REPLACE VIEW gold.dim_products AS
+ 
+SELECT 
+       ROW_NUMBER() OVER(ORDER BY pn.prd_start_dt, pn.prd_key) AS product_key,
+        pn.prd_id       AS product_id,
+        pn.prd_key      AS product_number,
+        pn.prd_nm       AS product_name,
+        pn.cat_id       AS category_id,
+        pc.cat          AS category,
+        pc.subcat       AS sub_category,
+        pc.maintenance,
+        pn.prd_cost     AS cost,
+        pn.prd_line     AS product_line,
+        pn.prd_start_dt AS start_date    
+    FROM silver.crm_prd_info AS pn
+    LEFT JOIN silver.erp_px_cat_g1v2 AS pc
+        ON pn.cat_id = pc.id
+    WHERE pn.prd_end_dt IS NULL;           ---filter out all historical data
 
 -- ===================================================================
 -- Create Fact Table: gold.fact_sales
 -- ===================================================================
-DROP VIEW IF EXISTS gold.fact_sales;
+CREATE OR REPLACE VIEW gold.fact_sales AS
 
-CREATE VIEW gold.fact_sales AS
-SELECT
-    sd.sls_ord_num     AS order_number,
-    pr.product_key     AS product_key,
-    cu.customer_key    AS customer_key,
-    sd.sls_order_dt    AS order_date,
-    sd.sls_ship_dt     AS shipping_date,
-    sd.sls_due_dt      AS due_date,
-    sd.sls_sales       AS sales_amount,
-    sd.sls_quantity    AS quantity,
-    sd.sls_price       AS price
->>>>>>> 337dade689eb5a2a14864ef875e41aa09a1bdf3a
-FROM silver.crm_sales_details sd
-LEFT JOIN gold.dim_products pr
-    ON sd.sls_prd_key = pr.product_number
-LEFT JOIN gold.dim_customers cu
-    ON sd.sls_cust_id = cu.customer_id;
-<<<<<<< HEAD
-GO
-=======
+SELECT 
+    ps.sls_ord_num  AS order_number,
+    pr.product_key,  
+    pc.customer_key,        
+    ps.sls_order_dt AS Order_date,       
+    ps.sls_ship_dt  AS shipping_date,
+    ps.sls_due_dt   AS due_date,
+    ps.sls_sales    AS sales_amount,
+    ps.sls_quantity AS quantity,
+    ps.sls_price    AS price
+FROM silver.crm_sales_details AS ps
+LEFT JOIN gold.dim_products AS pr
+    ON ps.sls_prd_key = pr.product_number
+LEFT JOIN gold.dim_customers AS pc
+    ON ps.sls_cust_id = pc.customer_id;
+
 
 >>>>>>> 337dade689eb5a2a14864ef875e41aa09a1bdf3a
