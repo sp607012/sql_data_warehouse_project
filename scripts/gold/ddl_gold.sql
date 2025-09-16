@@ -103,4 +103,4 @@ LEFT JOIN gold.dim_customers AS pc
     ON ps.sls_cust_id = pc.customer_id;
 
 
->>>>>>> 337dade689eb5a2a14864ef875e41aa09a1bdf3a
+
